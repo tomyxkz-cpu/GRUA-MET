@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistencia Vial MET - Asistencia Vial 24/7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --amarillo: #F5A800;
+    --negro: #111111;
+    --gris: #1E1E1E;
+    --gris-claro: #F5F5F5;
+    --blanco: #FFFFFF;
+  }
+  body { font-family: 'Poppins', 'Segoe UI', sans-serif; color: var(--negro); background: var(--blanco); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(17,17,17,0.95); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+  }
+  .logo { font-size: 1.6rem; font-weight: 900; color: var(--amarillo); letter-spacing: -1px; }
+  .logo span { color: var(--blanco); }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul a {
+    color: #ccc; text-decoration: none; font-size: 0.9rem; font-weight: 600;
+    position: relative; padding: 4px 0;
+    transition: color .3s ease;
+  }
+  nav ul a::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 50%; width: 0; height: 2px;
+    background: var(--amarillo);
+    transition: width .3s ease, left .3s ease;
+    border-radius: 2px;
+  }
+  nav ul a:hover { color: var(--amarillo); }
+  nav ul a:hover::after { width: 100%; left: 0; }
+  .nav-cta {
+    background: var(--amarillo); color: var(--negro); border: none;
+    padding: 10px 24px; border-radius: 6px; font-weight: 700;
+    cursor: pointer; font-size: 0.9rem;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,168,0,0.4); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #111 60%, #1a1a1a 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
+    opacity: 0.18;
+  }
+  .hero-inner { max-width: 1100px; width: 100%; display: flex; align-items: center; gap: 60px; position: relative; }
+  .hero-text { flex: 1; }
+  .badge {
+    display: inline-block; background: var(--amarillo); color: var(--negro);
+    font-size: 0.75rem; font-weight: 800; letter-spacing: 2px;
+    padding: 6px 14px; border-radius: 4px; margin-bottom: 20px; text-transform: uppercase;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 900; color: var(--blanco); line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 span { color: var(--amarillo); }
+  .hero p { color: #aaa; font-size: 1.1rem; line-height: 1.7; max-width: 480px; margin-bottom: 36px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--amarillo); color: var(--negro); padding: 16px 32px;
+    border: none; border-radius: 8px; font-size: 1rem; font-weight: 800;
+    cursor: pointer; transition: transform .2s, opacity .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); opacity: .9; }
+  .btn-outline {
+    background: transparent; color: var(--blanco); padding: 16px 32px;
+    border: 2px solid #444; border-radius: 8px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: border-color .2s, color .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
+  .hero-img { flex: 1; display: flex; justify-content: center; }
+  .hero-img img { width: 100%; max-width: 480px; border-radius: 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+
+  /* STATS */
+  .stats {
+    background: var(--amarillo); padding: 28px 48px;
+    display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 900; color: var(--negro); }
+  .stat-label { font-size: 0.8rem; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* SERVICIOS */
+  .section { padding: 96px 48px; max-width: 1100px; margin: 0 auto; }
+  .section-tag { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: var(--amarillo); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; margin-bottom: 12px; }
+  .section-sub { color: #666; font-size: 1rem; line-height: 1.7; max-width: 520px; margin-bottom: 52px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--gris-claro); border-radius: 14px; padding: 32px 28px;
+    transition: transform .25s, box-shadow .25s; border: 2px solid transparent;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: var(--amarillo); }
+  .card-icon { font-size: 2.4rem; margin-bottom: 18px; }
+  .card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 10px; }
+  .card p { color: #666; font-size: 0.9rem; line-height: 1.7; }
+
+  /* POR QUÉ */
+  .why-section { background: var(--negro); padding: 96px 48px; }
+  .why-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 72px; align-items: center; }
+  .why-img { flex: 1; }
+  .why-img img { width: 100%; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .why-text { flex: 1; }
+  .why-text .section-tag { color: var(--amarillo); }
+  .why-text .section-title { color: var(--blanco); }
+  .why-text .section-sub { color: #999; margin-bottom: 36px; }
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .checklist li { display: flex; align-items: flex-start; gap: 12px; color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+  .check { width: 22px; height: 22px; background: var(--amarillo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--negro); flex-shrink: 0; margin-top: 2px; }
+
+  /* TESTIMONIOS */
+  .testi-section { background: var(--gris-claro); padding: 96px 48px; }
+  .testi-inner { max-width: 1100px; margin: 0 auto; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .testi-card { background: var(--blanco); border-radius: 14px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .stars { color: var(--amarillo); font-size: 1rem; margin-bottom: 14px; }
+  .testi-card p { color: #444; font-size: 0.92rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; background: #ddd; overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .author-info strong { display: block; font-size: 0.9rem; }
+  .author-info span { font-size: 0.8rem; color: #999; }
+
+  /* CONTACTO */
+  .contact-section { background: linear-gradient(135deg, var(--negro) 0%, #1a1200 100%); padding: 96px 48px; }
+  .contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .contact-inner .section-title { color: var(--blanco); margin-bottom: 12px; }
+  .contact-inner p { color: #999; margin-bottom: 40px; font-size: 1rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.82rem; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: #1e1e1e; border: 1.5px solid #333; border-radius: 8px;
+    color: var(--blanco); padding: 12px 16px; font-size: 0.95rem;
+    transition: border-color .2s; outline: none; font-family: inherit;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--amarillo); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: #1e1e1e; }
+  .btn-form { background: var(--amarillo); color: var(--negro); border: none; padding: 16px; border-radius: 8px; font-size: 1rem; font-weight: 800; cursor: pointer; transition: opacity .2s; }
+  .btn-form:hover { opacity: .88; }
+
+  /* FOOTER */
+  footer { background: #0a0a0a; padding: 36px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; gap: 16px; }
+  footer .logo { font-size: 1.3rem; }
+  footer p { color: #555; font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { color: #555; text-decoration: none; font-size: 0.82rem; transition: color .2s; }
+  .footer-links a:hover { color: var(--amarillo); }
+
+  /* PHONE FLOAT */
+  .phone-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    background: #25D366; color: #fff; width: 58px; height: 58px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; box-shadow: 0 6px 24px rgba(0,0,0,0.3); text-decoration: none;
+    transition: transform .2s;
+  }
+  .phone-float:hover { transform: scale(1.1); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-inner { flex-direction: column; gap: 36px; }
+    .hero-img { display: none; }
+    .stats { gap: 32px; padding: 24px 20px; }
+    .section { padding: 64px 20px; }
+    .why-inner { flex-direction: column; padding: 64px 20px; }
+    .testi-section { padding: 64px 20px; }
+    .contact-section { padding: 64px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Asistencia Vial <span>MET</span></div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#testimonios">Opiniones</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">📞 Llamar Ahora</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge">⚡ Servicio 24 / 7 — 365 días</div>
+      <h1>Tu rescate en<br><span>carretera</span> llega<br>en minutos.</h1>
+      <p>Servicio de grúa profesional, rápido y confiable. Estamos disponibles las 24 horas para sacarte de cualquier apuro en la carretera.</p>
+      <div class="hero-btns">
+        <a href="tel:+525500000000" class="btn-primary">📞 Llamar de emergencia</a>
+        <a href="#servicios" class="btn-outline">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Grúa profesional en carretera">
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">+5,000</div><div class="stat-label">Servicios realizados</div></div>
+  <div class="stat"><div class="stat-num">15 min</div><div class="stat-label">Tiempo de respuesta</div></div>
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Disponibilidad</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Clientes satisfechos</div></div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section">
+    <div class="section-tag">Lo que ofrecemos</div>
+    <h2 class="section-title">Servicios completos de<br>asistencia vial</h2>
+    <p class="section-sub">Contamos con el equipo y la experiencia para atender todo tipo de vehículo, en cualquier situación.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🚗</div>
+        <h3>Arrastre local</h3>
+        <p>Trasladamos tu vehículo de forma segura dentro de la ciudad o zona metropolitana, sin daños y al mejor precio.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛣️</div>
+        <h3>Arrastre foráneo</h3>
+        <p>Llevamos tu auto a cualquier punto del país con conductores certificados y seguimiento en tiempo real.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Auxilio vial</h3>
+        <p>Cambio de neumático, carga de batería, apertura de puertas y suministro de gasolina en el lugar del incidente.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏗️</div>
+        <h3>Grúa industrial</h3>
+        <p>Equipos de gran capacidad para maquinaria pesada, camiones y trailers. Operadores especializados.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⛽</div>
+        <h3>Combustible de emergencia</h3>
+        <p>Te llevamos gasolina o diésel donde te quedaste varado, sin que tengas que abandonar tu vehículo.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌧️</div>
+        <h3>Rescate en accidente</h3>
+        <p>Extracción segura de vehículos accidentados, volcados o atascados, con equipo especializado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ NOSOTROS -->
+<section id="nosotros" class="why-section">
+  <div class="why-inner">
+    <div class="why-img">
+      <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=600&q=80" alt="Operador de grúa profesional">
+    </div>
+    <div class="why-text">
+      <div class="section-tag">¿Por qué elegirnos?</div>
+      <h2 class="section-title" style="color:#fff">Experiencia y confianza<br>en cada servicio</h2>
+      <p class="section-sub">Llevamos más de 10 años en el mercado, construyendo una reputación basada en puntualidad, profesionalismo y atención al cliente.</p>
+      <ul class="checklist">
+        <li><div class="check">✓</div><span>Operadores certificados y con amplia experiencia en el manejo de todo tipo de vehículos.</span></li>
+        <li><div class="check">✓</div><span>Flota moderna con grúas plataforma, tipo lazo y de arrastre para cualquier necesidad.</span></li>
+        <li><div class="check">✓</div><span>Precios transparentes, sin cobros ocultos. Cotización inmediata por teléfono o WhatsApp.</span></li>
+        <li><div class="check">✓</div><span>Seguro de carga incluido en cada servicio para tu total tranquilidad.</span></li>
+        <li><div class="check">✓</div><span>Atención inmediata los 365 días del año, incluidos días festivos.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios" class="testi-section">
+  <div class="testi-inner">
+    <div class="section-tag" style="text-align:center">Opiniones reales</div>
+    <h2 class="section-title" style="text-align:center;margin-bottom:8px">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 48px">Más de 5,000 clientes satisfechos nos respaldan.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Me quedé varado en carretera a medianoche y en menos de 20 minutos ya tenía la grúa. Servicio impecable y muy amable el operador."</p>
+        <div class="testi-author">
+          <div class="avatar"><img src="https://i.pravatar.cc/80?img=11" alt="Carlos M."></div>
+          <div class="author-info"><strong>Carlos M.</strong><span>Cliente recurrente</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Usé su servicio de arrastre foráneo y fue perfecto. Mi carro llegó sin un rasguño y el precio fue muy justo comparado con la competencia."</p>
+        <div class="testi-author">
+          <div class="avatar"><img src="https://i.pravatar.cc/80?img=25" alt="Ana L."></div>
+          <div class="author-info"><strong>Ana L.</strong><span>Primera vez</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Los contacté por WhatsApp y en 5 minutos ya tenía confirmación del servicio. Muy profesionales, los recomiendo ampliamente."</p>
+        <div class="testi-author">
+          <div class="avatar"><img src="https://i.pravatar.cc/80?img=33" alt="Roberto V."></div>
+          <div class="author-info"><strong>Roberto V.</strong><span>Empresa local</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section">
+  <div class="contact-inner">
+    <div class="section-tag" style="color:var(--amarillo)">Solicita tu servicio</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:12px">¿Necesitas una grúa ahora?</h2>
+    <p>Déjanos tus datos y te contactamos en menos de 5 minutos, o llámanos directamente.</p>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre completo">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+52 55 0000 0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tipo de servicio</label>
+        <select>
+          <option value="">Selecciona un servicio</option>
+          <option>Arrastre local</option>
+          <option>Arrastre foráneo</option>
+          <option>Auxilio vial</option>
+          <option>Grúa industrial</option>
+          <option>Combustible de emergencia</option>
+          <option>Rescate en accidente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ubicación actual</label>
+        <input type="text" placeholder="Calle, colonia o punto de referencia">
+      </div>
+      <div class="form-group">
+        <label>Descripción (opcional)</label>
+        <textarea placeholder="Cuéntanos brevemente qué pasó con tu vehículo..."></textarea>
+      </div>
+      <button class="btn-form">🚨 Solicitar servicio ahora</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Asistencia Vial <span>MET</span></div>
+  <p>© 2025 Asistencia Vial MET. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="#">Aviso de privacidad</a>
+    <a href="#">Términos</a>
+    <a href="#">Contacto</a>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/525500000000" class="phone-float" target="_blank" title="Contactar por WhatsApp">💬</a>
+
+</body>
+</html>
