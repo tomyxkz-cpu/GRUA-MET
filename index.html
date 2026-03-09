@@ -101,8 +101,13 @@
     cursor: pointer; transition: border-color .2s, color .2s; text-decoration: none; display: inline-block;
   }
   .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
-  .hero-img { flex: 1; display: flex; justify-content: center; }
+  .hero-img { flex: 1; display: flex; justify-content: center; position: relative; }
   .hero-img img { width: 100%; max-width: 480px; border-radius: 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+  @keyframes vidShow {
+    0%, 45% { opacity: 0; }
+    50%, 95% { opacity: 1; }
+    100% { opacity: 0; }
+  }
 
   /* STATS */
   .stats {
@@ -242,7 +247,12 @@
       </div>
     </div>
     <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Grúa profesional en carretera">
+      <video autoplay muted loop playsinline style="width:100%;max-width:480px;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
+        <source src="WhatsApp Video 2026-03-09 at 08.22.53.mp4" type="video/mp4">
+      </video>
+      <video autoplay muted loop playsinline style="width:100%;max-width:480px;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,0.5);position:absolute;top:0;left:0;opacity:0;animation:vidShow 20s infinite;">
+        <source src="WhatsApp Video 2026-03-08 at 17.04.28.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
