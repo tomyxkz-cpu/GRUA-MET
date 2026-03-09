@@ -81,24 +81,6 @@
     90% { background-image: url('20240629_090853.jpg'); }
     100% { background-image: url('WhatsApp Image 2026-02-03 at 00.17.36 (3).jpeg'); }
   }
-  .hero-video {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-  .hero-video:first-child { opacity: 0.6; animation: videoShow 20s infinite; }
-  .hero-video:last-child { opacity: 0; animation: videoShow2 20s infinite; }
-  @keyframes videoShow {
-    0%, 45% { opacity: 0.6; }
-    50%, 95% { opacity: 0; }
-    100% { opacity: 0.6; }
-  }
-  @keyframes videoShow2 {
-    0%, 45% { opacity: 0; }
-    50%, 95% { opacity: 0.6; }
-    100% { opacity: 0; }
-  }
   .hero-inner { max-width: 1100px; width: 100%; display: flex; align-items: center; gap: 60px; position: relative; }
   .hero-text { flex: 1; }
   .badge {
@@ -124,12 +106,7 @@
   .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
   .hero-img { flex: 1; display: flex; justify-content: center; position: relative; }
   .hero-img img { width: 100%; max-width: 480px; border-radius: 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
-  @keyframes vidShow {
-    0%, 45% { opacity: 0; }
-    50%, 95% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
+  
   /* STATS */
   .stats {
     background: var(--amarillo); padding: 28px 48px;
@@ -251,12 +228,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="WhatsApp Video 2026-03-09 at 08.22.53.mp4" type="video/mp4">
-  </video>
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="WhatsApp Video 2026-03-08 at 17.04.28.mp4" type="video/mp4">
-  </video>
   <div class="hero-inner">
     <div class="hero-text">
       <div class="badge">⚡ Servicio 24 / 7 — 365 días</div>
@@ -268,12 +239,7 @@
       </div>
     </div>
     <div class="hero-img">
-      <video autoplay muted loop playsinline style="width:100%;max-width:480px;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
-        <source src="WhatsApp Video 2026-03-09 at 08.22.53.mp4" type="video/mp4">
-      </video>
-      <video autoplay muted loop playsinline style="width:100%;max-width:480px;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,0.5);position:absolute;top:0;left:0;opacity:0;animation:vidShow 20s infinite;">
-        <source src="WhatsApp Video 2026-03-08 at 17.04.28.mp4" type="video/mp4">
-      </video>
+      <img src="WhatsApp Image 2026-02-03 at 00.17.36 (3).jpeg" alt="Grúa profesional" style="width:100%;max-width:480px;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
     </div>
   </div>
 </section>
